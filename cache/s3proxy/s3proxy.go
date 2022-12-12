@@ -160,14 +160,12 @@ func logResponse(log cache.Logger, method, bucket, key string, err error) {
 }
 
 func (c *s3Cache) uploadFile(item uploadReq) {
-	_, err := c.mcore.PutObject(
+	_, err := c.mcore.Client.PutObject(
 		context.Background(),
 		c.bucket,                          // bucketName
 		c.objectKey(item.hash, item.kind), // objectName
 		item.rc,                           // reader
 		item.size,                         // objectSize
-		"",                                // md5base64
-		"",                                // sha256
 		minio.PutObjectOptions{
 			UserMetadata: map[string]string{
 				"Content-Type": "application/octet-stream",
