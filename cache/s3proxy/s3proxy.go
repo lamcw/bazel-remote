@@ -170,6 +170,7 @@ func (c *s3Cache) uploadFile(item uploadReq) {
 			UserMetadata: map[string]string{
 				"Content-Type": "application/octet-stream",
 			},
+			NumThreads: 16,
 		}, // metadata
 	)
 
